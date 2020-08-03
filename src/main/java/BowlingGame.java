@@ -11,7 +11,7 @@ public class BowlingGame {
             throw new NotEnoughThrowException("You don't have enough throws.");
         }
 
-        roundPoints = calculateScore(roundPoints, scoreBoard);
+        roundPoints = calculateRoundScore(roundPoints, scoreBoard);
 
         int totalScore = 0;
         for(Integer points: roundPoints) {
@@ -20,16 +20,24 @@ public class BowlingGame {
         return totalScore;
     }
 
-    private static List<Integer> calculateScore(List<Integer> roundPoints, int[] scoreBoard) {
+    private static List<Integer> calculateRoundScore(List<Integer> roundPoints, int[] scoreBoard) {
         for(int i = 0; i < BOWLING_ROUND; i++) {
             if(i < BOWLING_ROUND - 1) {
-                if(scoreBoard[i] == 10){
+                if(isStrike(scoreBoard[i])){
                     roundPoints.add(scoreBoard[i] + scoreBoard[i+1] + scoreBoard[i+2]);
                 }
             }else{
-                roundPoints.add(scoreBoard[i] + scoreBoard[i+1] + scoreBoard[i+2]);
+                if(isStrike(scoreBoard[i])) {
+                    roundPoints.add(scoreBoard[i] + scoreBoard[i+1] + scoreBoard[i+2]);
+                }else{
+                    roundPoints.add(scoreBoard[i] + scoreBoard[i+1]);
+                }
             }
         }
         return roundPoints;
+    }
+
+    private static boolean isStrike(int score) {
+        return score == 10;
     }
 }
