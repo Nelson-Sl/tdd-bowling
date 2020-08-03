@@ -7,7 +7,7 @@ public class BowlingGame {
 
     public static int printScore(int[] scoreBoard) throws NotEnoughThrowException {
         List<Integer> roundPoints = new ArrayList<>();
-        if(scoreBoard.length < LEAST_THROW_NUM) {
+        if(scoreBoard.length < LEAST_THROW_NUM ) {
             throw new NotEnoughThrowException("You don't have enough throws.");
         }
 
@@ -23,20 +23,20 @@ public class BowlingGame {
     private static List<Integer> calculateRoundScore(List<Integer> roundPoints, int[] scoreBoard) {
         int currentIndex = 0;
         for(int i = 0; i < BOWLING_ROUND; i++) {
-            if(i < BOWLING_ROUND - 1) {
-                if(isStrike(scoreBoard[currentIndex])){
+            if(!isOnLastRound(i) && isStrike(scoreBoard[currentIndex])) {
+                roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1] + scoreBoard[currentIndex+2]);
+                currentIndex++;
+            } else if(!isOnLastRound(i) && isSpare(scoreBoard[currentIndex],scoreBoard[currentIndex+1])) {
                     roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1] + scoreBoard[currentIndex+2]);
-                    currentIndex++;
-                }else{
-                    roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1]);
                     currentIndex += 2;
-                }
-            }else{
-                if(isStrike(scoreBoard[currentIndex]) || isSpare(scoreBoard[currentIndex], scoreBoard[currentIndex+1])) {
-                    roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1] + scoreBoard[currentIndex+2]);
-                }else{
-                    roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1]);
-                }
+            } else if(!isOnLastRound(i)){
+                roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1]);
+                currentIndex += 2;
+            } else if(isOnLastRound(i) && isStrike(scoreBoard[currentIndex]) ||
+                isSpare(scoreBoard[currentIndex], scoreBoard[currentIndex+1])){
+                roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1] + scoreBoard[currentIndex+2]);
+            } else{
+                roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1]);
             }
         }
         return roundPoints;
@@ -48,5 +48,9 @@ public class BowlingGame {
 
     private static boolean isSpare(int score1, int score2) {
         return score1 + score2 == 10;
+    }
+
+    private static boolean isOnLastRound (int round) {
+        return round >= BOWLING_ROUND;
     }
 }
