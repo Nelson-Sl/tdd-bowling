@@ -9,6 +9,12 @@ public class BowlingGameTest {
     }
 
     @Test
+    void null_throws_nullPointer_error() {
+        int[] scoreBoard = null;
+        Assertions.assertThrows(NullPointerException.class, () -> BowlingGame.printScore(scoreBoard));
+    }
+
+    @Test
     void all_round_had_strike_returns_full_mark() throws NotEnoughThrowException {
         //Given
         int[] scoreBoard = new int[] {10,10,10,10,10,10,10,10,10,10,10,10};

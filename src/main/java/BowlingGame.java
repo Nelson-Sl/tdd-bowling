@@ -7,7 +7,7 @@ public class BowlingGame {
 
     public static int printScore(int[] scoreBoard) throws NotEnoughThrowException {
         List<Integer> roundPoints = new ArrayList<>();
-        if(scoreBoard.length < LEAST_THROW_NUM ) {
+        if(scoreBoard.length < LEAST_THROW_NUM) {
             throw new NotEnoughThrowException("You don't have enough throws.");
         }
 
