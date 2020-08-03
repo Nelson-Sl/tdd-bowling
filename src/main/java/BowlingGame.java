@@ -27,7 +27,7 @@ public class BowlingGame {
                     roundPoints.add(scoreBoard[i] + scoreBoard[i+1] + scoreBoard[i+2]);
                 }
             }else{
-                if(isStrike(scoreBoard[i])) {
+                if(isStrike(scoreBoard[i]) || isSpare(scoreBoard[i], scoreBoard[i+1])) {
                     roundPoints.add(scoreBoard[i] + scoreBoard[i+1] + scoreBoard[i+2]);
                 }else{
                     roundPoints.add(scoreBoard[i] + scoreBoard[i+1]);
@@ -39,5 +39,9 @@ public class BowlingGame {
 
     private static boolean isStrike(int score) {
         return score == 10;
+    }
+
+    private static boolean isSpare(int score1, int score2) {
+        return score1 + score2 == 10;
     }
 }

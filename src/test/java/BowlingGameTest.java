@@ -37,4 +37,14 @@ public class BowlingGameTest {
         //Then
         Assertions.assertEquals(264, totalScore);
     }
+
+    @Test
+    void all_round_had_strike_except_tenth_round_had_only_spare_in_all_round() throws NotEnoughThrowException {
+        //Given
+        int[] scoreBoard = new int[] {10,10,10,10,10,10,10,10,10,6,4,3};
+        //When
+        int totalScore = BowlingGame.printScore(scoreBoard);
+        //Then
+        Assertions.assertEquals(269, totalScore);
+    }
 }
