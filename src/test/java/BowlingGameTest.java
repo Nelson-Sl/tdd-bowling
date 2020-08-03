@@ -47,4 +47,14 @@ public class BowlingGameTest {
         //Then
         Assertions.assertEquals(269, totalScore);
     }
+
+    @Test
+    void all_round_had_no_strike_or_spare() throws NotEnoughThrowException {
+        //Given
+        int[] scoreBoard = new int[] {5,2,7,1,7,2,2,5,3,6,2,5,4,3,5,3,2,1,5,3};
+        //When
+        int totalScore = BowlingGame.printScore(scoreBoard);
+        //Then
+        Assertions.assertEquals(73, totalScore);
+    }
 }

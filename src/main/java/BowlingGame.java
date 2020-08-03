@@ -21,16 +21,21 @@ public class BowlingGame {
     }
 
     private static List<Integer> calculateRoundScore(List<Integer> roundPoints, int[] scoreBoard) {
+        int currentIndex = 0;
         for(int i = 0; i < BOWLING_ROUND; i++) {
             if(i < BOWLING_ROUND - 1) {
                 if(isStrike(scoreBoard[i])){
-                    roundPoints.add(scoreBoard[i] + scoreBoard[i+1] + scoreBoard[i+2]);
+                    roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1] + scoreBoard[currentIndex+2]);
+                    currentIndex++;
+                }else{
+                    roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1]);
+                    currentIndex += 2;
                 }
             }else{
-                if(isStrike(scoreBoard[i]) || isSpare(scoreBoard[i], scoreBoard[i+1])) {
-                    roundPoints.add(scoreBoard[i] + scoreBoard[i+1] + scoreBoard[i+2]);
+                if(isStrike(scoreBoard[currentIndex]) || isSpare(scoreBoard[currentIndex], scoreBoard[currentIndex+1])) {
+                    roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1] + scoreBoard[currentIndex+2]);
                 }else{
-                    roundPoints.add(scoreBoard[i] + scoreBoard[i+1]);
+                    roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1]);
                 }
             }
         }
