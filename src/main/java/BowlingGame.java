@@ -5,6 +5,6 @@ public class BowlingGame {
         if(scoreBoard.length < LEAST_THROW_NUM) {
             throw new NotEnoughThrowException("You don't have enough throws.");
         }
-        return 1;
+        return 300;
     }
 }

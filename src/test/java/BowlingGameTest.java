@@ -7,4 +7,14 @@ public class BowlingGameTest {
         int[] scoreBoard = new int[] {10,10,10,10,10,10,10,10,10,10};
         Assertions.assertThrows(NotEnoughThrowException.class, () -> BowlingGame.printScore(scoreBoard));
     }
+
+    @Test
+    void all_round_had_strike_returns_full_mark() throws NotEnoughThrowException {
+        //Given
+        int[] scoreBoard = new int[] {10,10,10,10,10,10,10,10,10,10,10,10};
+        //When
+        int totalScore = BowlingGame.printScore(scoreBoard);
+        //Then
+        Assertions.assertEquals(300, totalScore);
+    }
 }
