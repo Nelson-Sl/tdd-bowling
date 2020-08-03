@@ -24,7 +24,7 @@ public class BowlingGame {
         int currentIndex = 0;
         for(int i = 0; i < BOWLING_ROUND; i++) {
             if(i < BOWLING_ROUND - 1) {
-                if(isStrike(scoreBoard[i])){
+                if(isStrike(scoreBoard[currentIndex])){
                     roundPoints.add(scoreBoard[currentIndex] + scoreBoard[currentIndex+1] + scoreBoard[currentIndex+2]);
                     currentIndex++;
                 }else{
