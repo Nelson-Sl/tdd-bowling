@@ -83,4 +83,14 @@ public class BowlingGameTest {
         //Then
         Assertions.assertEquals(245, totalScore);
     }
+
+    @Test
+    void Game_with_no_throws_that_can_take_a_bowling() throws NotEnoughThrowException {
+        //Given
+        int[] scoreBoard = new int[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        //When
+        int totalScore = BowlingGame.printScore(scoreBoard);
+        //Then
+        Assertions.assertEquals(0, totalScore);
+    }
 }
